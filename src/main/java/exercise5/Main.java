@@ -11,7 +11,7 @@ import com.google.common.cache.LoadingCache;
 import static spark.Spark.*;
 
 /* Chinh sua
-tren server github */
+hop nhat giua server & client */
 public class Main {
 
 	public static boolean isPrime(int n) {
@@ -63,7 +63,6 @@ public class Main {
 		});
 
 	}
-	/* Chinh sua tren server may client
-	*/
+
 
 }
