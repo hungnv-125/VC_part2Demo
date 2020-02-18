@@ -61,5 +61,7 @@ public class Main {
 		});
 
 	}
+	/* Chinh sua tren server may client
+	*/
 
 }
