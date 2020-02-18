@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<!-- <property name="LOG_HOME" value="logs" /> -->
+	<appender name="CONSOLE"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>
+				%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n
+			</Pattern>
+		</layout>
+	</appender>
+
+	<appender name="FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>logs/fixWindowBasedlogFile.log</file>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<fileNamePattern>logs/fixWindowBasedlogFile%i.log
+			</fileNamePattern>
+			<minIndex>1</minIndex>
+			<maxIndex>10</maxIndex>
+		</rollingPolicy>
+
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<maxFileSize>1KB</maxFileSize>
+		</triggeringPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd-HH-mm} %-5level %logger{35} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="FILE_TIME"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>logs\logFile.txt</file>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>logs\logFile.%d{yyyy-MM-dd}.%i.txt
+			</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<!-- or whenever the file size reaches 50MB -->
+				<maxFileSize>1MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		
+		<encoder
+			class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<charset>UTF-8</charset>
+<!-- 			<outputPatternAsHeader>true</outputPatternAsHeader> -->
+			<pattern> %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="hung" level="all" additivity="false">
+		<!-- <appender-ref ref="CONSOLE" /> -->
+		<appender-ref ref="FILE" />
+	</logger>
+
+	<logger name="ex2" level="all" additivity="false">
+		<!-- <appender-ref ref="CONSOLE" /> -->
+		<appender-ref ref="FILE_TIME" />
+	</logger>
+
+	<!-- <root level="info"> -->
+	<!-- <appender-ref ref="CONSOLE" /> -->
+	<!-- </root> -->
+
+</configuration>
